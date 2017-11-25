@@ -1,14 +1,7 @@
---[[
-	cherry_tree:cherry_tree
-	cherry_tree:cherry_plank
-	cherry_tree:cherry_blossom_leaves
-	cherry_tree:cherry_sapling
---]]
-
 local random = math.random
 
 -- Cherry tree growing
--- Sapling ABM
+-- Sapling LBM
 
 -- Cherry tree generation
 local function grow_cherry_tree(pos)
@@ -97,20 +90,6 @@ minetest.register_node(
 		sounds = default.node_sound_leaves_defaults(),
 		after_place_node = default.after_place_leaves,
 	})
-
---[[minetest.register_node("cherry_tree:cherry_leaves_deco", {
-	description = "Cherry Leaves",
-	drawtype = "allfaces_optional",
-	visual_scale = 1.3,
-	tiles = {"default_cherry_blossom_leaves.png"},
-	paramtype = "light",
-	waving=1,
-	is_ground_content = false,
-	groups = {snappy=3, flammable=2, leaves=1},
-	sounds = default.node_sound_leaves_defaults(),
-	drop = {'cherry_tree:cherry_blossom_leaves'},
-	})
---]]
 
 minetest.register_node(
 	"cherry_tree:cherry_sapling",
@@ -314,3 +293,63 @@ minetest.register_decoration(
 		flags = "place_center_x",
 		rotation = "random",
 	})
+
+if minetest.get_modpath("doors") then
+	-- Door from BFD: Cherry planks doors
+	doors.register(
+		"door_cherry",
+		{
+			tiles = {"doors_door_cherry.png"},
+			description = "Cherry Door",
+			inventory_image = "doors_item_cherry.png",
+			groups = {choppy=2, oddly_breakable_by_hand=2, flammable=2, door=1},
+			sounds = default.node_sound_wood_defaults(),
+			recipe = {
+				{"cherry_tree:cherry_plank", "cherry_tree:cherry_plank"},
+				{"cherry_tree:cherry_plank", "cherry_tree:cherry_plank"},
+				{"cherry_tree:cherry_plank", "cherry_tree:cherry_plank"}
+			}
+		})
+	minetest.register_alias("doors:door_wood_cherry", "doors:door_cherry")
+
+	doors.register_trapdoor(
+		"cherry_tree:trapdoor_cherry",
+		{
+			description = "Cherry tree trapdoor",
+			inventory_image = "doors_trapdoor_cherry.png",
+			wields_images = "doors_trapdoor_cherry.png",
+			tile_front = "doors_trapdoor_cherry.png",
+			tile_side = "default_wood_cherry_planks.png",
+			groups = {snappy=1, choppy=2, oddly_breakable_by_hand=2, flammable=2, door=1},
+			sounds = default.node_sound_wood_defaults(),
+			sound_open = "doors_door_open",
+			sound_close = "doors_door_close"
+		})
+
+	minetest.register_craft(
+		{
+			output = 'cherry_tree:trapdoor_cherry 2',
+			recipe = {
+				{'cherry_tree:cherry_plank', 'cherry_tree:cherry_plank', 'cherry_tree:cherry_plank'},
+				{'cherry_tree:cherry_plank', 'cherry_tree:cherry_plank', 'cherry_tree:cherry_plank'},
+			}
+		})
+	
+	minetest.register_alias("doors:trapdoor_cherry", "cherry_tree:trapdoor_cherry")
+end
+
+if minetest.get_modpath("stairs") then
+	-- From BFD:
+	
+	stairs.register_stair_and_slab(
+		"cherry_wood",
+		"cherry_tree:cherry_plank",
+		{snappy=2,choppy=2,oddly_breakable_by_hand=2,flammable=3},
+		{"default_wood_cherry_planks.png"},
+		"Cherry Plank Stair",
+		"Cherry Plank Slab",
+		"Cherry Plank Corner Stair",
+		default.node_sound_wood_defaults()
+	)
+	
+end
