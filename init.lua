@@ -214,6 +214,7 @@ minetest.register_biome(
 -- Decoration
 -- Cherry tree and log
 
+-- Cherry trees
 minetest.register_decoration(
 	{
 		deco_type = "schematic",
@@ -255,9 +256,6 @@ minetest.register_decoration(
 		},
 		biomes = {
 			"deciduous_forest",
-			"cherry_blossom_forest",
-			"cherry_blossom_forest_floral",
-			"cherry_blossom_forest_grassy"
 		},
 		y_min = 1,
 		y_max = 31000,
@@ -267,6 +265,7 @@ minetest.register_decoration(
 		rotation = "random",
 	})
 
+-- cherry logs
 minetest.register_decoration(
 	{
 		deco_type = "schematic",
@@ -281,10 +280,33 @@ minetest.register_decoration(
 			persist = 0.66
 		},
 		biomes = {
-			"deciduous_forest",
 			"cherry_blossom_forest",
 			"cherry_blossom_forest_floral",
 			"cherry_blossom_forest_grassy"
+		},
+		y_min = 1,
+		y_max = 31000,
+		schematic = minetest.get_modpath("cherry_tree") ..
+			"/schematics/cherry_log.mts",
+		flags = "place_center_x",
+		rotation = "random",
+	})
+
+minetest.register_decoration(
+	{
+		deco_type = "schematic",
+		place_on = {"default:dirt_with_grass"},
+		sidelen = 16,
+		noise_params = {
+			offset = 0.0004,
+			scale = 0.0003,
+			spread = {x = 250, y = 250, z = 250},
+			seed = 3,
+			octaves = 3,
+			persist = 0.66
+		},
+		biomes = {
+			"deciduous_forest",
 		},
 		y_min = 1,
 		y_max = 31000,
