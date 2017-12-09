@@ -156,6 +156,26 @@ minetest.register_craft(
 		}
 	})
 
+-- Fuels
+minetest.register_craft({
+	type = "fuel",
+	recipe = "cherry_tree:cherry_tree",
+	burntime = 30,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "cherry_tree:cherry_plank",
+	burntime = 7,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "cherry_tree:cherry_sapling",
+	burntime = 10,
+})
+
+
 -- Mapgen
 minetest.register_biome(
 	{
@@ -358,6 +378,22 @@ if minetest.get_modpath("doors") then
 		})
 	
 	minetest.register_alias("doors:trapdoor_cherry", "cherry_tree:trapdoor_cherry")
+
+	-- fuels
+	minetest.register_craft(
+		{
+			type = "fuel",
+			recipe = "cherry_tree:trapdoor_cherry",
+			burntime = 7,
+		})
+
+	minetest.register_craft(
+		{
+			type = "fuel",
+			recipe = "doors:door_cherry",
+			burntime = 14,
+		})
+	
 end
 
 if minetest.get_modpath("stairs") then
