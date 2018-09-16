@@ -150,9 +150,9 @@ minetest.register_alias("default:mg_cherry_sapling", "cherry_tree:cherry_sapling
 -- Crafting
 minetest.register_craft(
 	{
-		output = 'cherry_tree:cherry_plank 4',
+		output = "cherry_tree:cherry_plank 6",
 		recipe = {
-			{'cherry_tree:cherry_tree'},
+			{"cherry_tree:cherry_tree"},
 		}
 	})
 
