@@ -357,7 +357,33 @@ if minetest.get_modpath("doors") then
 	
 end
 
-if minetest.get_modpath("stairs") then
+if minetest.get_modpath("moreblocks") then
+	-- planks
+	local nodename = "cherry_tree:cherry_plank"
+	local ndef = table.copy(minetest.registered_nodes[nodename])
+	ndef.sunlight_propagates = true
+	ndef.place_param2 = nil
+
+	stairsplus:register_all(
+		"cherry_tree",
+		"cherry_plank",
+		nodename,
+		ndef
+	)
+
+	-- tree
+	nodename = "cherry_tree:cherry_tree"
+	ndef = table.copy(minetest.registered_nodes[nodename])
+	ndef.sunlight_propagates = true
+
+	stairsplus:register_all(
+		"cherry_tree",
+		"cherry_tree",
+		nodename,
+		ndef
+	)
+
+elseif minetest.get_modpath("stairs") then
 	-- From BFD:
 	
 	stairs.register_stair_and_slab(
@@ -370,5 +396,4 @@ if minetest.get_modpath("stairs") then
 		"Cherry Plank Corner Stair",
 		default.node_sound_wood_defaults()
 	)
-	
 end
